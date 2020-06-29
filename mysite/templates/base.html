@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <meta>
+    <title>TechAid</title>
+   
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+      rel="stylesheet"
+    />
+    <meta name="google" content="notranslate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </meta>
+
+  <body>
+    
+
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-blue shadow"
+      id="mainNav"
+    >
+      <div class="container-fluid">
+       <a href="{% url 'home'%}"> <img class="navbar-brand" style="width:90px; transform:none; cursor: pointer;" src="{% static '/img/logo.png' %}"></a>
+        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li>
+              <form action="" method="GET">
+                <div class="form-group has-search">
+                  <button style ="height:37px;"  class="btn btn-light form-control-feedback"><i class="fa fa-search" ></i> </button>
+                  <input class="form-control" placeholder="Search">
+                </div>
+              </form>
+            </li>
+            <li class="nav-item text-black">
+              <a class="nav-link text-black font-weight-bold" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item text-black">
+              <a class="nav-link text-black font-weight-bold" href="{% url 'policy' %}"
+                >Policy</a
+              >
+            </li>
+            <li class="nav-item text-black">
+              <a class="nav-link text-black font-weight-bold" href="{% url 'feedback' %}"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div style="text-align:center;">
+        <img src="{% static '/img/logo.png' %}">
+        <!-- <img src="{% static '/img/logo.png' %}">
+        <img src="{% static '/img/logo.png' %}">
+        <img src="{% static '/img/logo.png' %}"> -->
+    </div>
+    {% block content %}
+    <!-- Content Goes here -->
+   
+    {% endblock %}
+   
+    <!-- Footer -->
+    <div  class="alert alert-secondary">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <!-- <a href="?page=1"> &laquo; </a> -->
+              <a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}" class="btn btn-dark">Previous</a>
+          {% endif %}
+  
+          <span class="current">
+              {{ page_obj.number }} 
+          </span>
+  
+          {% if page_obj.has_next %}
+              <a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}" class="btn btn-dark">Next</a>
+              <!-- <a href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a> -->
+          {% endif %}
+      </span>
+  </div>
+<hr>
+  <div class="pb-4" style="text-align: center;">
+    <a href="https://www.facebook.com" target="_blank">
+      <i class="fa fa-facebook "></i>
+    </a>
+
+    <a href="https://twitter.com/MDBootstrap" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+      <i class="fa fa-youtube"></i>
+    </a>
+
+    <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
+      <i class="fa fa-google"></i>
+    </a>
+
+    <a href="https://pinterest.com/mdbootstrap" target="_blank">
+      <i class="fa fa-whatsapp"></i>
+    </a>
+
+    <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+      <i class="fa fa-github"></i>
+    </a>
+
+    <a href="http://codepen.io/mdbootstrap/" target="_blank">
+      <i class="fa fa-instagram "></i>
+    </a>
+  </div>
+  <hr>
+    <footer class="py-3 bg-grey" >
+      <p class="m-0 text-dark text-center ">Copyright &copy;2020 TechAid</p>
+    </footer>
+  </body>
+
+
+  <!-- Bootstrap tooltips -->
+  <!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+  
+    <script type="text/javascript">
+      // Animations initialization
+      new WOW().init();
+  
+    </script>
+  
+</html>

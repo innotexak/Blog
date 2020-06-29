@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+<div style="padding:10px 20%; background:#f4f4f4;" class="container">
+  {% if messages %}
+  <div class="form-group">
+    <ul class="form-group ">
+      {% for message in messages %}
+      <p
+        style="background:rgb(56, 124, 56); color:#fa9272"
+        {%
+        if
+        message.tags
+        %}
+        class="{{ message.tag }} "
+        {%
+        endif
+        %}
+      >
+        <p class="alert alert-success" role="alert">{{ message }}</p>
+      </p>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="content">
+    <div class="section-inner clearfix">
+      <h1> <span class="badge badge-secondary">Contact TechAid</span></h1>
+      <form action="" method="POST" class="form-group">
+        {% csrf_token %} 
+        <p >{{ form.as_p }}</p>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
