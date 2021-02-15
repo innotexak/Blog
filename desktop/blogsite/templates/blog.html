@@ -1,0 +1,235 @@
+{% extends 'base.html' %} {% load static %}
+{% block content %}
+        <!--================Home Banner Area =================-->
+        <!-- <section class="home_banner_area blog_banner">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="blog_b_text text-center">
+						<h2>Dude You’re Getting <br /> a Telescope</h2>
+						<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first</p>
+						<a class="white_bg_btn" href="#">View More</a>
+					</div>
+				</div>
+            </div>
+        </section> -->
+        <!--================End Home Banner Area =================-->
+    
+        <!--================Blog Categorie Area =================-->
+        
+        <!--================Blog Area =================-->
+        <div class="mt-5"></div>
+        <br>
+        <section class="blog_area mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                       
+                        <div class="blog_left_sidebar">
+                            
+                            <article class="row blog_item">
+                                 {% for post in post_list %}
+                               <div class="col-md-3">
+                                   <div class="blog_info text-right">
+                                      
+                                        <div class="post_tag">
+                                             
+                                            <a class="active" href="#">Technology</a>
+                                          
+                                        </div>
+                                        <ul class="blog_meta list" >
+                                            <li><a href="#" style="font-size:10px !important;">{{post.author}}<i class="lnr lnr-user"></i></a></li>
+                                            <li><a href="#"style="font-size:10px !important;">{{post.published_on}}<i class="lnr lnr-calendar-full"></i></a></li>
+                                            <li><a href="#"style="font-size:10px !important;">1.2M Views<i class="lnr lnr-eye"></i></a></li>
+                                            
+                                            <!-- <li><a href="#"style="font-size:10px !important;">{{comments.count}} <i class="lnr lnr-bubble"></i></a></li> -->
+                                        </ul>
+                                    </div>
+                               </div>
+                                <div class="col-md-9">
+                                    <h2 class="text-center">{{post.title}}</h2>
+                                    <div class="blog_post">
+                                        <img src="{{ post.blog_image.url }}" alt="The blog post image goes here">
+                                        <div class="blog_details">
+                                            <!-- <a href="single-blog.html"><h2></h2></a> -->
+                                            <p>{{post.body|slice:":300"}}...</p>
+                                            <a href="{% url 'postdetail' post.slug %}" class="blog_btn">Read More &rarr;</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                 {% endfor %}
+                            </article>
+                       
+                            <nav class="blog-pagination justify-content-center d-flex">
+                              
+		                        <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+		                            <li class="page-item">
+		                                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sms" aria-label="Previous">
+		                                    <span aria-hidden="true">
+		                                        <span class="lnr lnr-chevron-left"></span>
+		                                    </span>
+		                                </a>
+                                    </li>
+                                    {% endif %}
+		                            <li class="page-item"><a href="#" class="btn btn-primary btn-sm">Pg {{page_obj.number}} of {{ page_obj.paginator.num_pages}}</a></li>
+		                            
+                                    {% if page_obj.has_next %}
+                                    <li>
+		                                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm" aria-label="Next">
+		                                    <span aria-hidden="true">
+		                                        <span class="lnr lnr-chevron-right"></span>
+		                                    </span>
+		                                </a>
+                                    </li>
+                                    {% endif %}
+		                        </ul>
+		                    </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+                                <form method="GET" action="{% url 'search' %}">
+                                    {% csrf_token %}
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="q" placeholder="Search Posts">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                                    </span>
+                                </div><!-- /input-group -->
+                                </form>
+                                <!-- <div>
+                                   
+                                </div> -->
+                                <div class="br"></div>
+                            </aside>
+                            <aside class="single_sidebar_widget author_widget">
+                                <img class="author_img rounded-circle" src="{% static 'img/banner/personal.png'%}" alt="" style="width:80px; height:80px;">
+                                <h4>Akuh Innocent</h4>
+                                <p>Senior Programmer</p>
+                                <div class="social_icon">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-github"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                </div>
+                                <p>The major driving force towards my success in tech was my desire and love towards invention and problem solving. </p>
+                                <p>I'm always willing to be engaged in any business that is legit! Yes, I'm.</p>
+                                <div class="br"></div>
+                            </aside>
+                            <aside class="single_sidebar_widget popular_post_widget" style="overflow-y:scroll  !important; height:300px;">
+                                <h3 class="widget_title">Popular Posts</h3>
+                                {% for post in post_list %}
+                                <div class="media post_item">
+                                    <img src="{{post.blog_image.url}}" style="width:80px; height:80px;" alt="post">
+                                    <div class="media-body">
+                                        <a href="{% url 'postdetail' post.slug %}"><h3 style="font-size:10px !important;">{{post.title}}</h3></a>
+                                        <p style="font-size:10px !important;" >{{post.published_on}}</p>
+                                           
+
+                                    </div>
+                                </div>
+                              {% endfor %}
+
+                                
+                            </aside>
+                             <div class="br"></div>
+                            <aside class="single_sidebar_widget ads_widget mt-2">
+                                <a href="#"><img class="img-fluid" src="{% static 'img/blog/add.jpg'%}" alt=""></a>
+                                <div class="br"></div>
+                            </aside>
+                            <aside class="single_sidebar_widget post_category_widget">
+                                <h4 class="widget_title">Post Catgories</h4>
+                                <ul class="list cat-list">
+                                   
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Technology</p>
+                                            
+                                            <p>{{post_list.count}}</p>
+                                             
+                                        </a>
+                                    </li>
+                                   
+                                    <!-- <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Lifestyle</p>
+                                            <p>24</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Fashion</p>
+                                            <p>59</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Art</p>
+                                            <p>29</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Food</p>
+                                            <p>15</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Architecture</p>
+                                            <p>09</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Adventure</p>
+                                            <p>44</p>
+                                        </a>
+                                    </li>															 -->
+                                </ul>
+                                <div class="br"></div>
+                            </aside>
+                            <aside class="single-sidebar-widget newsletter_widget">
+                                <h4 class="widget_title">Newsletter</h4>
+                                <p>
+                                Here, I focus on a range of items and features that we use in life without
+                                giving them a second thought.
+                                </p>
+                                <div class="form-group d-flex flex-row">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'">
+                                    </div>
+                                    <a href="#" class="bbtns">Subcribe</a>
+                                </div>	
+                                <p class="text-bottom">You can unsubscribe at any time</p>	
+                                <div class="br"></div>							
+                            </aside>
+                            <aside class="single-sidebar-widget tag_cloud_widget">
+                                <h4 class="widget_title">EXPERTNESS</h4>
+                                <ul class="list">
+                                    <li><a href="#">Python</a></li>
+                                    <li><a href="#">Django</a></li>
+                                    <li><a href="#">DjangoCMS</a></li>
+                                    <li><a href="#">JavaScript</a></li>
+                                    <li><a href="#">HTML</a></li>
+                                    <li><a href="#">CSS</a></li>
+                                    <li><a href="#">Bootstrap</a></li>
+                                    <li><a href="#">JQuery</a></li>
+                                    <li><a href="#">PHP</a></li>
+                                    <li><a href="#">API's</a></li>
+                                    <li><a href="#">Photoshop</a></li>
+                                    <li><a href="#">CorelDraw</a></li>
+                                </ul>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+    {% endblock %}
